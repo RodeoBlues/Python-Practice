@@ -83,4 +83,4 @@ print("Total Average:: %f" %(total_average))
 print("Total Variance:: %f" %(total_variance))
 print("Total STD: %f" %(total_std))
 
-# one line added
+
