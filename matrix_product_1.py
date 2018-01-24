@@ -8,10 +8,12 @@ ans = [[0,0,0], [0,0,0],[0,0,0]]
 
 
 for i in range(length):
+    #iterator for items in A's row
     for j in range(length):
-        add = 0
+        #iterator for items in B's column
+        temp_add = 0
         for k in range(length):
-            add += A[i][k] * B[k][j]
-        ans[i][j] = add
+            temp_add += A[i][k] * B[k][j]
+        ans[i][j] = temp_add
 
 print(ans)
