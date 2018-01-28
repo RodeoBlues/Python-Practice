@@ -1,42 +1,55 @@
 import numpy as np
 
-a_col = int(input("A Row:: "))
-a_row = int(input("A Column:: "))
+#input variables
+a_col = 0
+a_row = 0
 
-b_col = int(input("B Row:: "))
-b_row = int(input("B Column:: "))
+b_col = 0
+b_row = 0
+
+INPUT = []
+
+#input function
+def inputF(): #Insert the input variables
+    inputF.a_col = int(input("A Row:: "))
+    inputF.a_row  = int(input("A Column:: "))
+
+    inputF.b_col = int(input("B Row:: "))
+    inputF.b_row = int(input("B Column:: "))
+    if(inputF.a_row != inputF.b_col):
+        print("ERROR. Can't calculate the product of two matrices with given dimension. Please try again.")
+        return 1
 
 
-def product(AC, AR, BC, BR):
-    if(AR != BC):
-        print("ERROR. Can't calculate the product of two matrices with given dimension.")
-        return
-    else:
-        #creating random arrays according to the columns and rows of a and b
-        a = np.random.randn(AC*AR).reshape(AC,AR)
-        b = np.random.randn(BC*BR).reshape(BC,BR)
-        correct_result = a.dot(b)
+while(inputF() == 1):
+    inputF() #calls the input function again
 
-        #creating the size of the result according to the columns and rows of a and b
-        result = [[0 for x in range(BR)] for y in range(AC)]
-        np.random.seed(1)
 
-        for i in range(len(a)): #going through the # of rows
-            for j in range(len(b[0])): #going through the # of columns
-                temp_add = 0
-                for k in range(len(b)):
-                    temp_add += a[i][k] * b[k][j]
-                #adding the multiplied data to the final array
-                result[i][j] = temp_add
+#insert the input data to the original variables
+a_col = inputF.a_col
+a_row = inputF.a_row
 
-        print("Correct Answer:: ")
-        print( correct_result )
-        print("\n")
+b_col = inputF.b_col
+b_row = inputF.b_row
 
-        print("My Caluclation:")
-        print( result )
-        print("\n")
-        
-        return
+#creating random arrays according to the columns and rows of a and b
+np.random.seed(1)
+a = np.random.randn(a_col*a_row).reshape(a_col, a_row)
+b = np.random.randn(b_col*b_row).reshape(b_col, b_row)
+correct_result = a.dot(b)
 
-product(a_col, a_row, b_col, b_row)
+#creating the size of the result according to the columns and rows of a and b
+result = [[0 for x in range(b_row)] for y in range(a_col)]
+
+#a function that multiplies two given matrices
+def product(A,B,C):
+    for i in range(len(A)): #going through the # of rows
+        for j in range(len(B[0])): #going through the # of columns
+            temp_add = 0
+            for k in range(len(B)):
+                temp_add += A[i][k] * B[k][j]
+            #adding the multiplied data to the final array
+            C[i][j] = temp_add
+    return C
+product(a, b, result)
+print(result)
